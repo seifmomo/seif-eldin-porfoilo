@@ -407,7 +407,7 @@
       <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
     </div>
     <div class="stats-row">
-      <div class="stat"><span class="stat-num">5</span><span class="stat-label">Projects Built</span></div>
+      <div class="stat"><span class="stat-num">6</span><span class="stat-label">Projects Built</span></div>
       <div class="stat"><span class="stat-num">6</span><span class="stat-label">Certifications</span></div>
       <div class="stat"><span class="stat-num">3</span><span class="stat-label">Languages Spoken</span></div>
       <div class="stat"><span class="stat-num">ECU</span><span class="stat-label">Current University</span></div>
@@ -583,6 +583,31 @@
         </div>
       </div>
       <div class="proj-icon-area">🚗</div>
+    </div>
+
+    <!-- HTTP Persistent vs Non-Persistent -->
+    <div class="proj-card wide reveal">
+      <div>
+        <div class="proj-header">
+          <span class="proj-num">06 — NETWORKING PROJECT</span>
+          <span class="proj-type-badge">Embedded Systems</span>
+        </div>
+        <h3 class="proj-title">HTTP Persistent vs. Non-Persistent Connections over IoT</h3>
+        <p class="proj-desc">A full client-server benchmarking study built from scratch on embedded hardware — comparing raw HTTP connection strategies over a live network with packet-level proof of the performance gap.</p>
+        <ul class="proj-bullets">
+          <li>Client-server system built from scratch: Arduino Uno manually constructs raw HTTP GET requests over an Ethernet Shield W5100</li>
+          <li>Manual TCP connection flag management — keep-alive vs. close — to control handshake behavior at the protocol level</li>
+          <li>Multi-threaded Python socket server handling concurrent persistent and non-persistent sessions</li>
+          <li>Benchmarked with 1ms precision — persistent connections cut latency by ~40–50% by eliminating redundant TCP 3-way handshakes</li>
+          <li>Packet-level evidence captured and analyzed via Wireshark to validate the results</li>
+        </ul>
+        <div class="proj-stack">
+          <span class="stack-tag">Arduino Uno</span><span class="stack-tag">Embedded C++</span>
+          <span class="stack-tag">Ethernet Shield W5100</span><span class="stack-tag">Python Sockets</span>
+          <span class="stack-tag">Multi-threading</span><span class="stack-tag">Wireshark</span>
+        </div>
+      </div>
+      <div class="proj-icon-area">📡</div>
     </div>
 
   </div>
