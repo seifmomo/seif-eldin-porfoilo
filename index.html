@@ -277,6 +277,25 @@ nav{
   background:radial-gradient(circle,rgba(200,160,40,0.025),transparent 70%);
   pointer-events:none;
 }
+.proj-filters{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:36px}
+.pf-btn{
+  background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.08);
+  color:rgba(255,255,255,0.45);font-family:'Inter',sans-serif;
+  font-size:0.72rem;font-weight:600;letter-spacing:0.8px;
+  padding:9px 20px;border-radius:100px;cursor:pointer;
+  transition:all 0.3s;display:inline-flex;align-items:center;gap:8px;
+}
+.pf-btn .pf-count{
+  font-size:0.64rem;color:rgba(255,255,255,0.25);
+  background:rgba(255,255,255,0.05);border-radius:100px;padding:1px 7px;
+}
+.pf-btn:hover{border-color:rgba(200,155,30,0.3);color:rgba(255,255,255,0.7)}
+.pf-btn.active{
+  background:linear-gradient(135deg,var(--gold),var(--gold2));
+  border-color:transparent;color:#0a0a0a;
+}
+.pf-btn.active .pf-count{background:rgba(0,0,0,0.15);color:#0a0a0a}
+.proj-card.hidden{display:none}
 .proj-grid{display:flex;flex-direction:column;gap:18px}
 .proj-card{
   background:var(--glass);border:1px solid rgba(255,255,255,0.04);
@@ -582,7 +601,7 @@ footer{
     <div class="about-right rev-r">
       <div class="about-right-lbl">At a Glance</div>
       <div class="about-stats">
-        <div class="astat"><span class="astat-num">7</span><span class="astat-lbl">Projects</span></div>
+        <div class="astat"><span class="astat-num">12</span><span class="astat-lbl">Projects</span></div>
         <div class="astat"><span class="astat-num">6</span><span class="astat-lbl">Certifications</span></div>
         <div class="astat"><span class="astat-num">3</span><span class="astat-lbl">Languages</span></div>
         <div class="astat"><span class="astat-num">2+</span><span class="astat-lbl">Years Building</span></div>
@@ -603,9 +622,16 @@ footer{
   <div class="sec-divider"></div>
   <div class="eyebrow">What I've Built</div>
   <h2 class="sec-h">Featured <em>Projects</em></h2>
+  <div class="proj-filters" id="projFilters">
+    <button class="pf-btn active" data-filter="all">All Projects <span class="pf-count">12</span></button>
+    <button class="pf-btn" data-filter="graphics">Graphics & Game Dev <span class="pf-count">5</span></button>
+    <button class="pf-btn" data-filter="web">Web Development <span class="pf-count">3</span></button>
+    <button class="pf-btn" data-filter="ai">AI & Machine Learning <span class="pf-count">2</span></button>
+    <button class="pf-btn" data-filter="systems">Systems & Networking <span class="pf-count">2</span></button>
+  </div>
   <div class="proj-grid">
 
-    <div class="proj-card rev">
+    <div class="proj-card rev" data-cat="web">
       <div>
         <div class="proj-num">01 — SOLO PROJECT</div>
         <h3 class="proj-title">FoodieDash — Online Food Ordering System</h3>
@@ -621,7 +647,7 @@ footer{
       <div class="proj-icon">🍔</div>
     </div>
 
-    <div class="proj-card rev">
+    <div class="proj-card rev" data-cat="systems">
       <div>
         <div class="proj-num">02 — ECU COURSEWORK</div>
         <h3 class="proj-title">Hospital Management System</h3>
@@ -637,7 +663,7 @@ footer{
       <div class="proj-icon">🏥</div>
     </div>
 
-    <div class="proj-card rev">
+    <div class="proj-card rev" data-cat="ai">
       <div>
         <div class="proj-num">03 — AI COURSE</div>
         <h3 class="proj-title">Warehouse Multi-Robot Coordination</h3>
@@ -653,7 +679,7 @@ footer{
       <div class="proj-icon">🤖</div>
     </div>
 
-    <div class="proj-card rev">
+    <div class="proj-card rev" data-cat="web">
       <div>
         <div class="proj-num">04 — SOLO PROJECT</div>
         <h3 class="proj-title">Study Planner — Personalized Schedule Generator</h3>
@@ -669,7 +695,7 @@ footer{
       <div class="proj-icon">📅</div>
     </div>
 
-        <div class="proj-card rev">
+        <div class="proj-card rev" data-cat="systems">
       <div>
         <div class="proj-num">05 — NETWORKING COURSE</div>
         <h3 class="proj-title">HTTP Persistent vs Non-Persistent Connections over IoT</h3>
@@ -685,7 +711,7 @@ footer{
       <div class="proj-icon">📡</div>
     </div>
 
-<div class="proj-card rev">
+<div class="proj-card rev" data-cat="web">
       <div>
         <div class="proj-num">06 — FREELANCE CLIENT</div>
         <h3 class="proj-title">El Gehad Automotive — Luxury Dealership Platform</h3>
@@ -701,7 +727,7 @@ footer{
       <div class="proj-icon">🚗</div>
     </div>
 
-    <div class="proj-card rev">
+    <div class="proj-card rev" data-cat="ai">
       <div>
         <div class="proj-num">07 — MACHINE LEARNING</div>
         <h3 class="proj-title">Energy Consumption Prediction & Analysis System</h3>
@@ -715,6 +741,81 @@ footer{
         <div class="stack"><span class="stag">Python</span><span class="stag">CatBoost</span><span class="stag">PyTorch</span><span class="stag">Scikit-learn</span><span class="stag">K-Means</span></div>
       </div>
       <div class="proj-icon">⚡</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="graphics">
+      <div>
+        <div class="proj-num">08 — GRAPHICS PROGRAMMING</div>
+        <h3 class="proj-title">3D Maze Game</h3>
+        <p class="proj-desc">A complete 3D puzzle game built from scratch with a hand-coded math library — no external dependencies for transforms, projection, or lighting.</p>
+        <ul class="proj-buls">
+          <li>Hand-coded 4×4 matrix math (translation, Rodrigues' axis rotation, scaling) and homogeneous coordinates — no external math libraries</li>
+          <li>Implemented Blinn-Phong illumination with 2 light sources, perspective & orthographic projections, and 3 switchable camera modes</li>
+          <li>Modeled all geometry from primitives (sphere, cylinder, torus, cone) with per-vertex normals and a hierarchical matrix-stack model system</li>
+          <li>Added delta-time animations, patrolling AI guards, and mouse-orbit camera controls</li>
+        </ul>
+        <div class="stack"><span class="stag">C++</span><span class="stag">OpenGL</span><span class="stag">FreeGLUT</span><span class="stag">Custom Math Library</span></div>
+      </div>
+      <div class="proj-icon">🌀</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="graphics">
+      <div>
+        <div class="proj-num">09 — GRAPHICS PROGRAMMING</div>
+        <h3 class="proj-title">Fast & Furious: 3D Street Racing</h3>
+        <p class="proj-desc">A night-city racing game with a procedurally generated city, AI traffic, and a fully hand-modeled sports car with a dynamic multi-light system.</p>
+        <ul class="proj-buls">
+          <li>Developed a procedurally generated city with 15 AI traffic cars and a 20-part sports car modeled entirely from geometric primitives</li>
+          <li>Engineered dynamic lighting: directional moonlight, 10 point-light street lamps, and spotlight headlights with a realistic material system (metallic paint, glass, rubber)</li>
+          <li>Integrated a multi-track MCI music engine with runtime track switching and proper device lifecycle management</li>
+        </ul>
+        <div class="stack"><span class="stag">C++</span><span class="stag">OpenGL</span><span class="stag">FreeGLUT</span><span class="stag">Win32/MCI Audio</span></div>
+      </div>
+      <div class="proj-icon">🏎️</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="graphics">
+      <div>
+        <div class="proj-num">10 — GRAPHICS PROGRAMMING</div>
+        <h3 class="proj-title">Nebula Overdrive — 3D Car Game</h3>
+        <p class="proj-desc">A browser-based 3D racing game with custom GLSL shaders, real-time shadow mapping, and a fully hand-rolled math and audio pipeline.</p>
+        <ul class="proj-buls">
+          <li>Wrote custom GLSL shaders including shadow mapping (depth render-to-texture from the light's viewpoint) combined with Blinn-Phong lighting for sun, headlights, and taillights</li>
+          <li>Implemented software matrix/vector math from scratch alongside a real-time minimap and HUD</li>
+          <li>Built procedural audio via the Web Audio API for engine and ambient sound</li>
+        </ul>
+        <div class="stack"><span class="stag">JavaScript</span><span class="stag">WebGL 2</span><span class="stag">GLSL ES 3.0</span></div>
+      </div>
+      <div class="proj-icon">🌌</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="graphics">
+      <div>
+        <div class="proj-num">11 — GRAPHICS PROGRAMMING</div>
+        <h3 class="proj-title">Neon Vortex Survivor</h3>
+        <p class="proj-desc">An arena survivor game with a full GPU post-processing pipeline and shader-driven neon visual identity.</p>
+        <ul class="proj-buls">
+          <li>Built a full post-processing pipeline: scene render target, bright-pass extraction, separable Gaussian bloom (multi-pass blur), and filmic tone mapping</li>
+          <li>Designed a GPU particle engine and a wave-based enemy manager with shader-driven neon aesthetics</li>
+        </ul>
+        <div class="stack"><span class="stag">C++</span><span class="stag">raylib</span><span class="stag">GLSL</span></div>
+      </div>
+      <div class="proj-icon">💫</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="graphics">
+      <div>
+        <div class="proj-num">12 — GRAPHICS PROGRAMMING</div>
+        <h3 class="proj-title">Cosmic Drift: Space Runner</h3>
+        <p class="proj-desc">An endless runner set in an asteroid field, simulating up to 1,500 concurrent particles with a fully hand-modeled spaceship.</p>
+        <ul class="proj-buls">
+          <li>Created a 12-part spaceship, asteroid field, and collectible rings modeled from primitives with emissive materials</li>
+          <li>Simulated up to 1,500 concurrent particles (engine trails, collection bursts, explosions) with linear fog and a 3-light setup</li>
+          <li>Added a smooth lerped chase camera with screen shake for game feel</li>
+        </ul>
+        <div class="stack"><span class="stag">C++</span><span class="stag">OpenGL</span><span class="stag">FreeGLUT</span></div>
+      </div>
+      <div class="proj-icon">☄️</div>
     </div>
 
   </div>
@@ -859,6 +960,25 @@ const ro=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.targe
 document.querySelectorAll('.rev,.rev-l,.rev-r').forEach(el=>ro.observe(el));
 
 document.getElementById('cForm').addEventListener('submit',e=>{e.preventDefault();alert("Message sent! I'll get back to you soon.");e.target.reset()});
+
+// Project category filters
+const pfBtns = document.querySelectorAll('.pf-btn');
+const projCards = document.querySelectorAll('.proj-card');
+pfBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    pfBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.getAttribute('data-filter');
+    projCards.forEach(card => {
+      const cat = card.getAttribute('data-cat');
+      if (filter === 'all' || cat === filter) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
 </script>
 </body>
 </html>
