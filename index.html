@@ -499,9 +499,17 @@ nav{
   display:flex;align-items:center;justify-content:center;
   color:var(--gold2);font-size:1.1rem;margin:0 auto 12px;
 }
-.skill-name{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;margin-bottom:4px}
+.skill-name{font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;margin-bottom:4px;color:var(--text)}
 .skill-level{font-size:0.62rem;color:var(--gold);font-weight:600;margin-bottom:2px;letter-spacing:0.5px}
 .skill-exp{font-size:0.6rem;color:rgba(var(--ink),0.2);font-weight:400}
+.skill-bar{height:4px;border-radius:100px;background:rgba(var(--ink),0.06);overflow:hidden;margin:10px 0 8px}
+.sk-fill{display:block;width:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:100px;box-shadow:0 0 8px rgba(200,155,30,0.35);transition:width 1.1s cubic-bezier(.4,0,.2,1)}
+.learning-row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:26px;padding-top:22px;border-top:1px solid rgba(var(--ink),0.05)}
+.learn-lbl{font-size:0.6rem;color:var(--gold);text-transform:uppercase;letter-spacing:2.4px;font-weight:700}
+.learn-chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{font-size:0.66rem;font-weight:600;color:rgba(var(--ink),0.6);border:1px solid rgba(var(--ink),0.1);padding:6px 13px;border-radius:100px;background:rgba(var(--ink),0.02);transition:all 0.3s}
+.chip:hover{border-color:rgba(200,155,30,0.35);color:var(--gold2)}
+.btn-cv{display:inline-flex;align-items:center;gap:8px}
 .lang-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:4px}
 .lang-c{
   background:rgba(var(--ink),0.015);border:1px solid rgba(var(--ink),0.04);
@@ -747,6 +755,12 @@ html[data-theme="light"] .proj-search::placeholder{color:rgba(var(--ink),0.35)}
 html[data-theme="light"] .proj-search-ico{color:rgba(var(--ink),0.4)}
 html[data-theme="light"] .proj-empty{color:rgba(var(--ink),0.4)}
 html[data-theme="light"] .skill-exp{color:rgba(var(--ink),0.4)}
+html[data-theme="light"] .skill-name{color:#16181d}
+html[data-theme="light"] .skill-lbl{color:var(--gold)}
+html[data-theme="light"] .lang-name{color:#16181d}
+html[data-theme="light"] .skill-bar{background:rgba(var(--ink),0.08)}
+html[data-theme="light"] .chip{color:rgba(var(--ink),0.6);background:#fff;border-color:rgba(var(--ink),0.12)}
+html[data-theme="light"] .learning-row{border-top-color:rgba(var(--ink),0.08)}
 html[data-theme="light"] .cf-meta{color:rgba(var(--ink),0.5)}
 html[data-theme="light"] .cf-buls li{color:rgba(var(--ink),0.6)}
 html[data-theme="light"] .proj-feat{color:#0a0a0a}
@@ -790,13 +804,13 @@ html[data-theme="light"] .proj-feat{color:#0a0a0a}
 
   <div class="hero-grid">
     <div class="hero-left">
-      <div class="hero-eyebrow"><span class="dot"></span>Available for Work</div>
-      <h1 class="hero-name">Saifeldin<span class="g">Mohamed Saied</span></h1>
+            <h1 class="hero-name">Saifeldin<span class="g">Mohamed Saied</span></h1>
       <div class="hero-role">Software Engineering Student<span class="sep"></span>Egyptian Chinese University<span class="sep"></span>Cairo, Egypt</div>
       <p class="hero-typed"><span id="typedLine"></span><span class="typed-caret" aria-hidden="true"></span></p>
       <p class="hero-desc">I build things end to end — from full-stack web apps and AI/ML systems to real-time graphics engines with hand-rolled math. Currently exploring the intersection of software engineering, machine learning, and computer graphics.</p>
       <div class="hero-cta-row">
         <a href="#projects" class="hero-btn-gold">Explore My Work <i class="fas fa-arrow-right"></i></a>
+        <a href="Saifeldin_Mohamed_CV.pdf" target="_blank" rel="noopener" class="btn btn-cv"><i class="fas fa-file-pdf"></i> Download CV</a>
         <a href="#contact" class="btn">Get In Touch</a>
       </div>
       <div class="hero-bottom-row">
@@ -1189,19 +1203,76 @@ html[data-theme="light"] .proj-feat{color:#0a0a0a}
   <div class="skill-group rev">
     <div class="skill-lbl">Programming Languages</div>
     <div class="skills-grid">
-      <div class="skill-card"><div class="skill-icon"><i class="fas fa-code"></i></div><div class="skill-name">C / C++</div><div class="skill-level">Advanced</div><div class="skill-exp">2+ Years</div></div>
-      <div class="skill-card"><div class="skill-icon"><i class="fab fa-js"></i></div><div class="skill-name">JavaScript</div><div class="skill-level">Advanced</div><div class="skill-exp">2+ Years</div></div>
-      <div class="skill-card"><div class="skill-icon"><i class="fab fa-python"></i></div><div class="skill-name">Python</div><div class="skill-level">Intermediate</div><div class="skill-exp">1+ Year</div></div>
-      <div class="skill-card"><div class="skill-icon"><i class="fab fa-html5"></i></div><div class="skill-name">HTML5 / CSS3</div><div class="skill-level">Advanced</div><div class="skill-exp">2+ Years</div></div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-code"></i></div>
+        <div class="skill-name">C / C++</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="92"></span></div>
+        <div class="skill-exp">2+ Years</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fab fa-js"></i></div>
+        <div class="skill-name">JavaScript</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="90"></span></div>
+        <div class="skill-exp">2+ Years</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fab fa-python"></i></div>
+        <div class="skill-name">Python</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="78"></span></div>
+        <div class="skill-exp">1+ Year</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fab fa-html5"></i></div>
+        <div class="skill-name">HTML5 / CSS3</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="94"></span></div>
+        <div class="skill-exp">2+ Years</div>
+      </div>
     </div>
   </div>
   <div class="skill-group rev">
     <div class="skill-lbl">AI & Algorithms</div>
     <div class="skills-grid">
-      <div class="skill-card"><div class="skill-icon"><i class="fas fa-route"></i></div><div class="skill-name">A* Pathfinding</div><div class="skill-level">Intermediate</div><div class="skill-exp">1+ Year</div></div>
-      <div class="skill-card"><div class="skill-icon"><i class="fas fa-robot"></i></div><div class="skill-name">MAPF / Multi-Agent</div><div class="skill-level">Intermediate</div><div class="skill-exp">1+ Year</div></div>
-      <div class="skill-card"><div class="skill-icon"><i class="fas fa-project-diagram"></i></div><div class="skill-name">OOP Design</div><div class="skill-level">Advanced</div><div class="skill-exp">2+ Years</div></div>
-      <div class="skill-card"><div class="skill-icon"><i class="fas fa-sitemap"></i></div><div class="skill-name">Data Structures</div><div class="skill-level">Intermediate</div><div class="skill-exp">1+ Year</div></div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-route"></i></div>
+        <div class="skill-name">A* Pathfinding</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="80"></span></div>
+        <div class="skill-exp">1+ Year</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-robot"></i></div>
+        <div class="skill-name">MAPF / Multi-Agent</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="76"></span></div>
+        <div class="skill-exp">1+ Year</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-project-diagram"></i></div>
+        <div class="skill-name">OOP Design</div>
+        <div class="skill-level">Advanced</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="88"></span></div>
+        <div class="skill-exp">2+ Years</div>
+      </div>
+      <div class="skill-card">
+        <div class="skill-icon"><i class="fas fa-sitemap"></i></div>
+        <div class="skill-name">Data Structures</div>
+        <div class="skill-level">Intermediate</div>
+        <div class="skill-bar"><span class="sk-fill" data-w="82"></span></div>
+        <div class="skill-exp">1+ Year</div>
+      </div>
+    </div>
+  </div>
+  <div class="learning-row rev">
+    <span class="learn-lbl">Currently Exploring</span>
+    <div class="learn-chips">
+      <span class="chip">CUDA</span>
+      <span class="chip">Docker</span>
+      <span class="chip">React · Next.js</span>
+      <span class="chip">PostgreSQL</span>
     </div>
   </div>
   <div class="skill-group rev">
@@ -1285,6 +1356,7 @@ html[data-theme="light"] .proj-feat{color:#0a0a0a}
         <a href="https://www.instagram.com/xx____seif____xx" target="_blank" rel="noopener" class="c-link"><i class="fab fa-instagram"></i> @xx____seif____xx</a>
         <div class="c-link" style="cursor:default"><i class="fas fa-map-marker-alt"></i> Street 9, Mokattam, Cairo, Egypt</div>
       </div>
+      <a href="Saifeldin_Mohamed_CV.pdf" target="_blank" rel="noopener" class="btn btn-cv" style="margin-top:18px"><i class="fas fa-file-pdf"></i> Download CV (PDF)</a>
     </div>
     <form class="c-form rev-r" id="cForm">
       <input type="text" name="name" class="c-input" placeholder="Your Name" required autocomplete="name">
@@ -1344,7 +1416,7 @@ function animateCount(el){
 }
 window.addEventListener('load',()=>{document.querySelectorAll('.hsi-num[data-count-up]').forEach(el=>{const o=new IntersectionObserver(es=>{es.forEach(x=>{if(x.isIntersecting){animateCount(el);o.unobserve(el)}})},{threshold:0.5});o.observe(el)})})
 // typed headline
-const ROLES=['I craft full-stack web apps.','I train ML models.','I build real-time 3D engines.','I ship Android apps.'];
+const ROLES=['I ship full-stack web apps.','I train ML & deep-learning systems.','I build 3D engines with hand-rolled math.','I design for impact — 15 projects shipped.'];
 let ri=0,ci=0,del=false;
 const tlEl=document.getElementById('typedLine');
 function typeLoop(){
