@@ -343,7 +343,7 @@ nav{
 }
 .proj-card:hover::before{transform:scaleX(1)}
 .proj-card:hover::after{opacity:1}
-.proj-num{font-size:0.55rem;font-weight:700;color:rgba(200,155,30,0.35);letter-spacing:2.5px;font-family:'Syne',sans-serif;margin-bottom:10px}
+.proj-num{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:0.55rem;font-weight:700;color:rgba(200,155,30,0.35);letter-spacing:2.5px;font-family:'Syne',sans-serif;margin-bottom:10px}
 .proj-title{font-family:'Syne',sans-serif;font-size:1.15rem;font-weight:700;margin-bottom:7px}
 .proj-desc{color:rgba(255,255,255,0.3);font-size:0.84rem;line-height:1.7;margin-bottom:14px;font-weight:300}
 .proj-buls{list-style:none;margin-bottom:14px}
@@ -357,6 +357,24 @@ nav{
   color:var(--gold);font-weight:500;letter-spacing:0.3px;
 }
 .proj-icon{width:80px;height:80px;border-radius:14px;background:var(--surface);border:1px solid rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;font-size:2rem;flex-shrink:0}
+.pnum{font-size:0.55rem;font-weight:700;color:rgba(200,155,30,0.7);letter-spacing:2.5px;font-family:'Syne',sans-serif}
+.ptag{font-size:0.53rem;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.09);padding:3px 10px;border-radius:20px;font-family:'Inter',sans-serif}
+.ptag-acc{color:var(--gold);background:rgba(200,155,30,0.06);border-color:rgba(200,155,30,0.18)}
+.proj-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
+.plink{display:inline-flex;align-items:center;gap:7px;font-size:0.68rem;font-weight:600;letter-spacing:0.4px;color:rgba(255,255,255,0.55);border:1px solid rgba(255,255,255,0.1);padding:7px 15px;border-radius:100px;transition:all 0.3s;text-decoration:none}
+.plink i{color:var(--gold);font-size:0.78rem}
+.plink:hover{border-color:var(--gold);color:#fff;transform:translateY(-1px)}
+.plink-live{background:linear-gradient(135deg,var(--gold),var(--gold2));border-color:transparent;color:#0a0a0a}
+.plink-live i{color:#0a0a0a}
+.plink-live:hover{color:#0a0a0a}
+.proj-toolbar{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:14px;max-width:460px}
+.proj-search-wrap{position:relative;flex:1 1 240px}
+.proj-search-ico{position:absolute;left:17px;top:50%;transform:translateY(-50%);color:rgba(255,255,255,0.3);font-size:0.78rem;pointer-events:none}
+.proj-search{width:100%;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:100px;padding:11px 18px 11px 40px;color:rgba(255,255,255,0.8);font-family:'Inter',sans-serif;font-size:0.78rem;outline:none;transition:all 0.3s;font-weight:300}
+.proj-search::placeholder{color:rgba(255,255,255,0.25)}
+.proj-search:focus{border-color:rgba(200,155,30,0.55);color:#fff;background:rgba(255,255,255,0.05)}
+.proj-empty{display:none;text-align:center;padding:44px 0;color:rgba(255,255,255,0.3);font-size:0.82rem;letter-spacing:0.4px}
+.proj-empty.show{display:block}
 
 #certifications{
   background:linear-gradient(180deg, #050505 0%, #0a0a0e 50%, #060608 100%);
@@ -642,7 +660,7 @@ footer{
         </div>
         <div class="hsi-div"></div>
         <div class="hero-stats-inline">
-          <div class="hsi-item"><span class="hsi-num">12</span><span class="hsi-lbl">Projects</span></div>
+          <div class="hsi-item"><span class="hsi-num">15</span><span class="hsi-lbl">Projects</span></div>
           <div class="hsi-item"><span class="hsi-num">10</span><span class="hsi-lbl">Certs</span></div>
         </div>
       </div>
@@ -682,7 +700,7 @@ footer{
     <div class="about-right rev-r">
       <div class="about-right-lbl">At a Glance</div>
       <div class="about-stats">
-        <div class="astat"><span class="astat-num">12</span><span class="astat-lbl">Projects</span></div>
+        <div class="astat"><span class="astat-num">15</span><span class="astat-lbl">Projects</span></div>
         <div class="astat"><span class="astat-num">10</span><span class="astat-lbl">Certifications</span></div>
         <div class="astat"><span class="astat-num">3</span><span class="astat-lbl">Languages</span></div>
         <div class="astat"><span class="astat-num">2+</span><span class="astat-lbl">Years Building</span></div>
@@ -703,18 +721,26 @@ footer{
   <div class="sec-divider"></div>
   <div class="eyebrow">What I've Built</div>
   <h2 class="sec-h">Featured <em>Projects</em></h2>
-  <div class="proj-filters" id="projFilters">
-    <button class="pf-btn active" data-filter="all">All Projects <span class="pf-count">12</span></button>
-    <button class="pf-btn" data-filter="graphics">Graphics & Game Dev <span class="pf-count">5</span></button>
-    <button class="pf-btn" data-filter="web">Web Development <span class="pf-count">3</span></button>
-    <button class="pf-btn" data-filter="ai">AI & Machine Learning <span class="pf-count">2</span></button>
-    <button class="pf-btn" data-filter="systems">Systems & Networking <span class="pf-count">2</span></button>
+  <div class="proj-toolbar">
+    <div class="proj-search-wrap">
+      <i class="fas fa-search proj-search-ico"></i>
+      <input class="proj-search" id="projSearch" type="text" placeholder="Search projects, tech or keywords…" autocomplete="off">
+    </div>
   </div>
+  <div class="proj-filters" id="projFilters">
+    <button class="pf-btn active" data-filter="all">All Projects <span class="pf-count">15</span></button>
+    <button class="pf-btn" data-filter="web">Web & Full-Stack <span class="pf-count">5</span></button>
+    <button class="pf-btn" data-filter="ai">AI & Machine Learning <span class="pf-count">2</span></button>
+    <button class="pf-btn" data-filter="graphics">Graphics & Game Dev <span class="pf-count">5</span></button>
+    <button class="pf-btn" data-filter="systems">Systems & Embedded <span class="pf-count">2</span></button>
+    <button class="pf-btn" data-filter="mobile">Mobile & Android <span class="pf-count">1</span></button>
+  </div>
+  <p class="proj-empty" id="projEmpty">No projects match your search or filter.</p>
   <div class="proj-grid">
 
     <div class="proj-card rev" data-cat="web">
       <div>
-        <div class="proj-num">01 — SOLO PROJECT</div>
+        <div class="proj-num"><span class="pnum">01</span><span class="ptag">SOLO PROJECT</span><span class="ptag ptag-acc">WEB & FULL-STACK</span></div>
         <h3 class="proj-title">FoodieDash — Online Food Ordering System</h3>
         <p class="proj-desc">A complete front-end food ordering platform covering the full user journey from browsing to delivery tracking, including an admin management dashboard.</p>
         <ul class="proj-buls">
@@ -724,13 +750,14 @@ footer{
           <li>Admin dashboard: manage orders, customers, and transactions</li>
         </ul>
         <div class="stack"><span class="stag">HTML5</span><span class="stag">CSS3</span><span class="stag">JavaScript</span><span class="stag">DOM API</span><span class="stag">localStorage</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/foodiedash" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">🍔</div>
     </div>
 
     <div class="proj-card rev" data-cat="systems">
       <div>
-        <div class="proj-num">02 — ECU COURSEWORK</div>
+        <div class="proj-num"><span class="pnum">02</span><span class="ptag">ECU COURSEWORK</span><span class="ptag ptag-acc">SYSTEMS & EMBEDDED</span></div>
         <h3 class="proj-title">Hospital Management System</h3>
         <p class="proj-desc">Console-based C++ application managing full hospital operations — patients, doctors, appointments, and automated billing.</p>
         <ul class="proj-buls">
@@ -740,13 +767,14 @@ footer{
           <li>Appointment scheduling with conflict detection and auto billing</li>
         </ul>
         <div class="stack"><span class="stag">C++</span><span class="stag">OOP</span><span class="stag">STL</span><span class="stag">Linked List</span><span class="stag">File I/O</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/hosbital-manage-system" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">🏥</div>
     </div>
 
     <div class="proj-card rev" data-cat="ai">
       <div>
-        <div class="proj-num">03 — AI COURSE</div>
+        <div class="proj-num"><span class="pnum">03</span><span class="ptag">AI COURSE</span><span class="ptag ptag-acc">AI & MACHINE LEARNING</span></div>
         <h3 class="proj-title">Warehouse Multi-Robot Coordination</h3>
         <p class="proj-desc">Simulates autonomous robots navigating a 10×10 grid warehouse, comparing independent vs cooperative multi-agent pathfinding with real-time visualisation.</p>
         <ul class="proj-buls">
@@ -762,7 +790,7 @@ footer{
 
     <div class="proj-card rev" data-cat="web">
       <div>
-        <div class="proj-num">04 — SOLO PROJECT</div>
+        <div class="proj-num"><span class="pnum">04</span><span class="ptag">SOLO PROJECT</span><span class="ptag ptag-acc">WEB & FULL-STACK</span></div>
         <h3 class="proj-title">Study Planner — Personalized Schedule Generator</h3>
         <p class="proj-desc">Full-stack web app that auto-generates study schedules using a priority algorithm. 30-user validated — reduces scheduling time from 30+ minutes to zero.</p>
         <ul class="proj-buls">
@@ -772,13 +800,14 @@ footer{
           <li>Freemium paywall with code activation system</li>
         </ul>
         <div class="stack"><span class="stag">Python</span><span class="stag">Flask</span><span class="stag">SQLite</span><span class="stag">Bootstrap 5</span><span class="stag">Chart.js</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/study-planner" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">📅</div>
     </div>
 
         <div class="proj-card rev" data-cat="systems">
       <div>
-        <div class="proj-num">05 — NETWORKING COURSE</div>
+        <div class="proj-num"><span class="pnum">05</span><span class="ptag">NETWORKING COURSE</span><span class="ptag ptag-acc">SYSTEMS & EMBEDDED</span></div>
         <h3 class="proj-title">HTTP Persistent vs Non-Persistent Connections over IoT</h3>
         <p class="proj-desc">A full client-server benchmarking system comparing HTTP connection strategies on embedded hardware, quantifying the real latency cost of repeated TCP handshakes.</p>
         <ul class="proj-buls">
@@ -794,7 +823,7 @@ footer{
 
 <div class="proj-card rev" data-cat="web">
       <div>
-        <div class="proj-num">06 — FREELANCE CLIENT</div>
+        <div class="proj-num"><span class="pnum">06</span><span class="ptag">FREELANCE CLIENT</span><span class="ptag ptag-acc">WEB & FULL-STACK</span></div>
         <h3 class="proj-title">El Gehad Automotive — Luxury Dealership Platform</h3>
         <p class="proj-desc">Static-first full-stack dealer site: 71-vehicle catalog with client-side search/filter and paginated "load more," per-vehicle detail pages, JWT-secured admin CRUD, and inquiry/newsletter pipelines.</p>
         <ul class="proj-buls">
@@ -804,13 +833,14 @@ footer{
           <li>Validated the platform with 34 passing end-to-end tests</li>
         </ul>
         <div class="stack"><span class="stag">HTML/CSS/JS</span><span class="stag">Node.js</span><span class="stag">Express</span><span class="stag">SQLite</span><span class="stag">JWT</span><span class="stag">GitHub Pages</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/el-gehad-automotive" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">🚗</div>
     </div>
 
     <div class="proj-card rev" data-cat="ai">
       <div>
-        <div class="proj-num">07 — MACHINE LEARNING</div>
+        <div class="proj-num"><span class="pnum">07</span><span class="ptag">MACHINE LEARNING</span><span class="ptag ptag-acc">AI & MACHINE LEARNING</span></div>
         <h3 class="proj-title">Energy Consumption Prediction & Analysis System</h3>
         <p class="proj-desc">A machine learning and deep learning system predicting household energy consumption, benchmarking model performance and uncovering usage patterns through unsupervised clustering.</p>
         <ul class="proj-buls">
@@ -820,13 +850,14 @@ footer{
           <li>Built the full pipeline in Python using Pandas, NumPy, Scikit-learn, CatBoost, PyTorch, and Joblib</li>
         </ul>
         <div class="stack"><span class="stag">Python</span><span class="stag">CatBoost</span><span class="stag">PyTorch</span><span class="stag">Scikit-learn</span><span class="stag">K-Means</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/appliances-energy-prediction" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">⚡</div>
     </div>
 
     <div class="proj-card rev" data-cat="graphics">
       <div>
-        <div class="proj-num">08 — GRAPHICS PROGRAMMING</div>
+        <div class="proj-num"><span class="pnum">08</span><span class="ptag">GRAPHICS PROGRAMMING</span><span class="ptag ptag-acc">GRAPHICS & GAME DEV</span></div>
         <h3 class="proj-title">3D Maze Game</h3>
         <p class="proj-desc">A complete 3D puzzle game built from scratch with a hand-coded math library — no external dependencies for transforms, projection, or lighting.</p>
         <ul class="proj-buls">
@@ -836,13 +867,14 @@ footer{
           <li>Added delta-time animations, patrolling AI guards, and mouse-orbit camera controls</li>
         </ul>
         <div class="stack"><span class="stag">C++</span><span class="stag">OpenGL</span><span class="stag">FreeGLUT</span><span class="stag">Custom Math Library</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/3D-Maze-Game" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">🌀</div>
     </div>
 
     <div class="proj-card rev" data-cat="graphics">
       <div>
-        <div class="proj-num">09 — GRAPHICS PROGRAMMING</div>
+        <div class="proj-num"><span class="pnum">09</span><span class="ptag">GRAPHICS PROGRAMMING</span><span class="ptag ptag-acc">GRAPHICS & GAME DEV</span></div>
         <h3 class="proj-title">Fast & Furious: 3D Street Racing</h3>
         <p class="proj-desc">A night-city racing game with a procedurally generated city, AI traffic, and a fully hand-modeled sports car with a dynamic multi-light system.</p>
         <ul class="proj-buls">
@@ -851,13 +883,14 @@ footer{
           <li>Integrated a multi-track MCI music engine with runtime track switching and proper device lifecycle management</li>
         </ul>
         <div class="stack"><span class="stag">C++</span><span class="stag">OpenGL</span><span class="stag">FreeGLUT</span><span class="stag">Win32/MCI Audio</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/StreetRacing" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">🏎️</div>
     </div>
 
     <div class="proj-card rev" data-cat="graphics">
       <div>
-        <div class="proj-num">10 — GRAPHICS PROGRAMMING</div>
+        <div class="proj-num"><span class="pnum">10</span><span class="ptag">GRAPHICS PROGRAMMING</span><span class="ptag ptag-acc">GRAPHICS & GAME DEV</span></div>
         <h3 class="proj-title">Nebula Overdrive — 3D Car Game</h3>
         <p class="proj-desc">A browser-based 3D racing game with custom GLSL shaders, real-time shadow mapping, and a fully hand-rolled math and audio pipeline.</p>
         <ul class="proj-buls">
@@ -872,7 +905,7 @@ footer{
 
     <div class="proj-card rev" data-cat="graphics">
       <div>
-        <div class="proj-num">11 — GRAPHICS PROGRAMMING</div>
+        <div class="proj-num"><span class="pnum">11</span><span class="ptag">GRAPHICS PROGRAMMING</span><span class="ptag ptag-acc">GRAPHICS & GAME DEV</span></div>
         <h3 class="proj-title">Neon Vortex Survivor</h3>
         <p class="proj-desc">An arena survivor game with a full GPU post-processing pipeline and shader-driven neon visual identity.</p>
         <ul class="proj-buls">
@@ -880,13 +913,14 @@ footer{
           <li>Designed a GPU particle engine and a wave-based enemy manager with shader-driven neon aesthetics</li>
         </ul>
         <div class="stack"><span class="stag">C++</span><span class="stag">raylib</span><span class="stag">GLSL</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/neon-vortex-survivor" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">💫</div>
     </div>
 
     <div class="proj-card rev" data-cat="graphics">
       <div>
-        <div class="proj-num">12 — GRAPHICS PROGRAMMING</div>
+        <div class="proj-num"><span class="pnum">12</span><span class="ptag">GRAPHICS PROGRAMMING</span><span class="ptag ptag-acc">GRAPHICS & GAME DEV</span></div>
         <h3 class="proj-title">Cosmic Drift: Space Runner</h3>
         <p class="proj-desc">An endless runner set in an asteroid field, simulating up to 1,500 concurrent particles with a fully hand-modeled spaceship.</p>
         <ul class="proj-buls">
@@ -895,8 +929,64 @@ footer{
           <li>Added a smooth lerped chase camera with screen shake for game feel</li>
         </ul>
         <div class="stack"><span class="stag">C++</span><span class="stag">OpenGL</span><span class="stag">FreeGLUT</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/CosmicDrift" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
       </div>
       <div class="proj-icon">☄️</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="web">
+      <div>
+        <div class="proj-num"><span class="pnum">13</span><span class="ptag">SOLO PROJECT</span><span class="ptag ptag-acc">WEB & FULL-STACK</span></div>
+        <h3 class="proj-title">EGYDIR — B2B Directory for Egyptian Companies & Factories</h3>
+        <p class="proj-desc">A full modern redesign of the legendary EGYDIR B2B directory with a fresh, bold identity and complete Arabic RTL support — rebuilt on real data from the original Egyptian platform.</p>
+        <ul class="proj-buls">
+          <li>Full Arabic RTL layout with Tajawal/Cairo fonts and logical start/end properties</li>
+          <li>Asymmetric hero with an Egypt "network map" visual and unified glass search (sector + governorate)</li>
+          <li>Smart multi-word Arabic search with working filters: manufacturers / importers / exporters</li>
+          <li>~48 real Egyptian companies + ~200 seeded companies with verified and color-coded sector badges</li>
+          <li>Company profile pages (About / Products / Contact) and an auto-rotating sponsors marquee</li>
+        </ul>
+        <div class="stack"><span class="stag">React 18</span><span class="stag">Vite 6</span><span class="stag">Tailwind CSS 4</span><span class="stag">React Router</span><span class="stag">RTL</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/egydir" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a><a class="plink plink-live" href="https://seifmomo.github.io/egydir/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a></div>
+      </div>
+      <div class="proj-icon">🏭</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="web">
+      <div>
+        <div class="proj-num"><span class="pnum">14</span><span class="ptag">SOLO PROJECT</span><span class="ptag ptag-acc">WEB & FULL-STACK</span></div>
+        <h3 class="proj-title">Quality Egypt — Corporate Website for an ELV Systems Integrator</h3>
+        <p class="proj-desc">Complete corporate website rebuild for Egyptian Engineering Projects Co., Quality — a leading ELV systems integrator operating since 1985.</p>
+        <ul class="proj-buls">
+          <li>Brand design system: deep navy + electric cyan + gold, fraunces/inter typography, glassmorphism and scroll-reveal motion</li>
+          <li>Cinematic hero slider with animated stats, plus a 4-step process section and FAQ accordion</li>
+          <li>Full site: About (story / vision & mission / timeline / values), 6 Services with detail pages, 16 activity scopes</li>
+          <li>120+ partner brands wall and 10 reference categories each with projects</li>
+          <li>News with article pages, interactive category filters, Jobs, and a working contact form with map</li>
+          <li>SEO-ready (Open Graph, JSON-LD schema) with accessibility polish</li>
+        </ul>
+        <div class="stack"><span class="stag">React 19</span><span class="stag">Vite 8</span><span class="stag">Tailwind CSS 4</span><span class="stag">React Router</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/quality-egypt" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a><a class="plink plink-live" href="https://seifmomo.github.io/quality-egypt/" target="_blank" rel="noopener"><i class="fas fa-external-link-alt"></i> Live Demo</a></div>
+      </div>
+      <div class="proj-icon">🏢</div>
+    </div>
+
+    <div class="proj-card rev" data-cat="mobile">
+      <div>
+        <div class="proj-num"><span class="pnum">15</span><span class="ptag">IMPACT X · STARTUP</span><span class="ptag ptag-acc">MOBILE & ANDROID</span></div>
+        <h3 class="proj-title">RAFIQ — Human Support Assistant Booking for People with Disabilities</h3>
+        <p class="proj-desc">An AI-powered accessibility marketplace (Android) that connects people with disabilities to trained support assistants — wrapping the journey in sign-language recognition, voice commands, live tracking and emergency SOS.</p>
+        <ul class="proj-buls">
+          <li>Two-sided marketplace: book trained, verified and rated assistants (wheelchair, sign-language, vision, elderly) with AI matching and "why this assistant" explanations</li>
+          <li>Offline-first accessibility suite: MediaPipe sign-language (10 signs), voice assistant with TTS, accessible map, AI chat with fallback</li>
+          <li>Real emergency path: accelerometer fall detection → 10s cancel → SMS + Firebase guardian alerts</li>
+          <li>Live Google Maps tracking, Google Pay sandbox, guardian push alerts, Room booking history with invoices and ratings</li>
+          <li>Kotlin + Jetpack Compose, Hilt, Room, Firebase, MediaPipe, CameraX; Node.js/Express + PostgreSQL backend; 39/39 unit tests passing</li>
+        </ul>
+        <div class="stack"><span class="stag">Kotlin</span><span class="stag">Jetpack Compose</span><span class="stag">Hilt</span><span class="stag">Room</span><span class="stag">Firebase</span><span class="stag">MediaPipe</span><span class="stag">Node.js</span><span class="stag">PostgreSQL</span></div>
+        <div class="proj-links"><a class="plink" href="https://github.com/seifmomo/Rafiq" target="_blank" rel="noopener"><i class="fab fa-github"></i> GitHub</a></div>
+      </div>
+      <div class="proj-icon">🤝</div>
     </div>
 
   </div>
@@ -1082,20 +1172,42 @@ const so=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.targe
 document.querySelectorAll('.sk-fill').forEach(f=>so.observe(f))
 document.getElementById('cForm')?.addEventListener('submit',e=>{e.preventDefault();alert("Message sent! I'll get back to you soon.");e.target.reset()})
 
-const pfBtns = document.querySelectorAll('.pf-btn');
-const projCards = document.querySelectorAll('.proj-card');
-pfBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    pfBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    const filter = btn.getAttribute('data-filter');
-    projCards.forEach(card => {
-      const cat = card.getAttribute('data-cat');
-      if (filter === 'all' || cat === filter) { card.classList.remove('hidden'); }
-      else { card.classList.add('hidden'); }
-    });
+// Project filters, live search & auto counts
+const pfBtns = Array.from(document.querySelectorAll('.pf-btn'));
+const projCards = Array.from(document.querySelectorAll('.proj-card'));
+const searchInput = document.getElementById('projSearch');
+const emptyState = document.getElementById('projEmpty');
+
+function applyProjectFilter() {
+  const filter = (document.querySelector('.pf-btn.active') || pfBtns[0]).getAttribute('data-filter');
+  const q = searchInput ? searchInput.value.trim().toLowerCase() : '';
+  let visible = 0;
+  projCards.forEach(card => {
+    const cat = card.getAttribute('data-cat');
+    const matchCat = filter === 'all' || cat === filter;
+    const matchQ = !q || card.textContent.toLowerCase().includes(q);
+    const show = matchCat && matchQ;
+    card.classList.toggle('hidden', !show);
+    if (show) visible++;
   });
-});
+  if (emptyState) emptyState.classList.toggle('show', visible === 0);
+}
+pfBtns.forEach(btn => btn.addEventListener('click', () => {
+  pfBtns.forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyProjectFilter();
+}));
+if (searchInput) searchInput.addEventListener('input', applyProjectFilter);
+
+function refreshCounts() {
+  pfBtns.forEach(btn => {
+    const f = btn.getAttribute('data-filter');
+    const n = f === 'all' ? projCards.length : projCards.filter(c => c.getAttribute('data-cat') === f).length;
+    const c = btn.querySelector('.pf-count');
+    if (c) c.textContent = n;
+  });
+}
+refreshCounts();
 </script>
 </body>
 </html>
