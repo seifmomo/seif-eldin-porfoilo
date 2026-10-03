@@ -1,4 +1,4 @@
-const VERSION = 'sms-portfolio-v5';
+const VERSION = 'sms-portfolio-v6';
 const base = self.registration.scope;
 const PRECACHE = [
   base,
