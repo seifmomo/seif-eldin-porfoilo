@@ -80,10 +80,22 @@ body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;overf
 ::-webkit-scrollbar-thumb{background:rgba(200,160,40,0.3);border-radius:4px}
 
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:100;
-  padding:20px 5%;display:flex;align-items:center;justify-content:space-between;
-  background:rgba(0,0,0,0.7);backdrop-filter:blur(28px);
-  border-bottom:1px solid rgba(200,160,40,0.06);
+  position:fixed;top:-130px;left:0;right:0;z-index:100;
+  width:min(1120px,94vw);margin-inline:auto;
+  padding:20px 26px;display:flex;align-items:center;justify-content:space-between;
+  background:transparent;border:1px solid transparent;border-radius:100px;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:top .55s cubic-bezier(.16,1,.3,1),opacity .45s ease,visibility .45s ease,padding .35s ease,
+    background .35s ease,border-color .35s ease,box-shadow .35s ease,border-radius .35s ease;
+}
+nav.floating{
+  top:16px;opacity:1;visibility:visible;pointer-events:auto;
+  padding:11px 24px;
+  background:rgba(8,8,12,0.55);
+  -webkit-backdrop-filter:blur(20px) saturate(1.6);
+  backdrop-filter:blur(20px) saturate(1.6);
+  border-color:rgba(200,160,40,0.2);
+  box-shadow:0 20px 45px rgba(0,0,0,0.45),inset 0 1px 0 rgba(255,255,255,0.07);
 }
 .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.15rem;color:var(--gold2);letter-spacing:-0.5px}
 .nav-logo sup{font-size:0.5em;color:rgba(200,160,40,0.5)}
@@ -149,7 +161,7 @@ html[data-theme="light"] .hero-spotlight{
 
 .hero-name{
   font-family:'Syne',sans-serif;font-weight:800;color:#fff;
-  font-size:clamp(2.6rem,4.8vw,4rem);line-height:1.06;letter-spacing:-1.5px;
+  font-size:clamp(2.6rem,5vw,4.4rem);line-height:1.06;letter-spacing:-1.5px;
   margin-bottom:20px;
   opacity:0;animation:heroUp 0.9s ease 0.3s forwards;
 }
@@ -656,7 +668,7 @@ footer{
 
 /* nav & scroll chrome */
 .nav-actions{display:flex;align-items:center;gap:10px}
-nav.scrolled{padding:12px 5%;box-shadow:0 12px 30px rgba(0,0,0,0.35)}
+nav.scrolled:not(.floating){padding:12px 5%;box-shadow:0 12px 30px rgba(0,0,0,0.35)}
 .theme-toggle{
   background:rgba(var(--ink),0.04);border:1px solid rgba(200,160,40,0.18);
   width:38px;height:38px;border-radius:50%;
@@ -711,7 +723,7 @@ nav.scrolled{padding:12px 5%;box-shadow:0 12px 30px rgba(0,0,0,0.35)}
 }
 @media(max-width:768px){
   nav{padding:16px 5%}
-  .nav-links{display:none;flex-direction:column;position:fixed;top:62px;left:0;width:100%;background:rgba(0,0,0,0.95);padding:24px 6%;border-bottom:1px solid rgba(200,155,30,0.06);gap:18px;backdrop-filter:blur(20px)}
+  .nav-links{display:none;flex-direction:column;position:fixed;top:78px;left:0;width:100%;background:rgba(0,0,0,0.95);padding:24px 6%;border-bottom:1px solid rgba(200,155,30,0.06);gap:18px;backdrop-filter:blur(20px)}
   .nav-links.open{display:flex}
   .menu-btn{display:block}
   .hero-photo{object-position:center 8%}
@@ -735,6 +747,84 @@ nav.scrolled{padding:12px 5%;box-shadow:0 12px 30px rgba(0,0,0,0.35)}
   .about-stats{gap:16px}
   .astat{min-width:60px}
   .ft-copy{font-size:0.72rem}
+}
+/* ===== interactive hero: parallax geometric layers ===== */
+.hero-shapes{
+  position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+  animation:heroShapesIn 1.6s cubic-bezier(.16,1,.3,1) .3s both;
+}
+@keyframes heroShapesIn{from{opacity:0;transform:scale(1.05)}to{opacity:1;transform:scale(1)}}
+.hero-gridlines{
+  position:absolute;inset:-8%;
+  background-image:
+    linear-gradient(rgba(200,160,40,0.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,160,40,0.055) 1px,transparent 1px);
+  background-size:66px 66px;
+  -webkit-mask-image:radial-gradient(ellipse 72% 68% at 58% 46%,#000 18%,transparent 76%);
+  mask-image:radial-gradient(ellipse 72% 68% at 58% 46%,#000 18%,transparent 76%);
+  transform:translate3d(var(--px,0px),var(--py,0px),0);
+}
+.shape{
+  position:absolute;display:block;
+  transform:translate3d(var(--px,0px),var(--py,0px),0) rotate(var(--rot,0deg));
+  opacity:var(--o,0.35);
+  will-change:transform;
+}
+.s1{top:6%;left:3%;width:300px;height:300px;border-radius:50%;border:1px solid rgba(200,160,40,0.28);--o:.5;--rot:0deg}
+.s2{top:-8%;right:12%;width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(200,160,40,0.13) 0%,rgba(200,160,40,0.04) 45%,transparent 70%);--o:.9}
+.s3{top:66%;left:5%;width:190px;height:190px;border-radius:50%;border:1px dashed rgba(232,200,74,0.4);--o:.55;--rot:18deg}
+.s4{top:21%;left:45%;width:112px;height:112px;border:1px solid rgba(232,200,74,0.42);--o:.55;--rot:45deg}
+.s5{top:62%;right:5%;width:150px;height:130px;
+  background:linear-gradient(140deg,rgba(232,200,74,0.5),rgba(200,160,40,0.03));
+  clip-path:polygon(50% 0,100% 100%,0 100%);--o:.4;--rot:-12deg}
+.s6{top:8%;right:-3%;width:170px;height:170px;border-radius:50%;border:2px solid rgba(200,160,40,0.45);--o:.55}
+.s7{top:79%;left:37%;width:160px;height:130px;
+  background-image:radial-gradient(rgba(232,200,74,0.65) 1.4px,transparent 1.5px);
+  background-size:22px 22px;
+  -webkit-mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 75%);
+  mask-image:radial-gradient(circle at 50% 50%,#000 30%,transparent 75%);--o:.5}
+.s8{top:73%;left:47%;width:96px;height:96px;background:rgba(200,160,40,0.14);
+  clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%);
+  border:0;--o:.75;--rot:14deg}
+.s9{top:4%;left:40%;width:64px;height:64px;--o:.7;--rot:0deg}
+.s9::before,.s9::after{content:'';position:absolute;background:rgba(232,200,74,0.55)}
+.s9::before{left:50%;top:0;width:1.5px;height:100%;transform:translateX(-50%)}
+.s9::after{top:50%;left:0;height:1.5px;width:100%;transform:translateY(-50%)}
+.s10{bottom:-14%;right:22%;width:430px;height:430px;border-radius:50%;
+  border:2px solid transparent;border-top-color:rgba(200,160,40,0.4);border-right-color:rgba(200,160,40,0.22);--o:.7;--rot:35deg}
+
+/* ===== glassmorphism cards ===== */
+.proj-card,.cert-card,.skill-card,.lang-c,.about-right,.cert-featured{
+  background:linear-gradient(150deg,rgba(var(--ink),0.055),rgba(var(--ink),0.018) 55%,rgba(200,160,40,0.035));
+  -webkit-backdrop-filter:blur(16px) saturate(1.5);
+  backdrop-filter:blur(16px) saturate(1.5);
+  border-color:rgba(var(--ink),0.09);
+  box-shadow:0 16px 40px rgba(0,0,0,0.35),inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.proj-search,.pf-btn{
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+}
+html[data-theme="light"] .hero-gridlines{
+  background-image:
+    linear-gradient(rgba(138,106,16,0.09) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(138,106,16,0.09) 1px,transparent 1px);
+}
+html[data-theme="light"] .shape{opacity:calc(var(--o,0.35) * 1.15)}
+html[data-theme="light"] nav.floating{
+  background:rgba(255,255,255,0.66);
+  border-color:rgba(138,106,16,0.22);
+  box-shadow:0 20px 45px rgba(25,30,45,0.14),inset 0 1px 0 rgba(255,255,255,0.9);
+}
+html[data-theme="light"] .proj-card,
+html[data-theme="light"] .cert-card,
+html[data-theme="light"] .skill-card,
+html[data-theme="light"] .lang-c,
+html[data-theme="light"] .about-right{
+  background:linear-gradient(150deg,rgba(255,255,255,0.72),rgba(255,255,255,0.5) 55%,rgba(255,252,240,0.6));
+  border-color:rgba(var(--ink),0.11);
+  box-shadow:0 16px 40px rgba(25,30,45,0.09),inset 0 1px 0 rgba(255,255,255,0.95);
 }
 html[data-theme="light"]{
   --bg:#f4f3ef;--panel:#ffffff;--glass:#ffffff;
@@ -771,12 +861,12 @@ html[data-theme="light"] #experience{background:linear-gradient(180deg,#f4f3ef 0
 html[data-theme="light"] #contact{background:linear-gradient(180deg,#f6f5f1 0%,#ffffff 50%,#f6f5f1 100%)}
 html[data-theme="light"] footer{border-top-color:rgba(var(--ink),0.09)}
 html[data-theme="light"] .ft-copy{color:rgba(var(--ink),0.4)}
-html[data-theme="light"] .proj-card{background:#ffffff;border-color:rgba(var(--ink),0.07)}
+html[data-theme="light"] .proj-card{background:linear-gradient(150deg,rgba(255,255,255,0.72),rgba(255,255,255,0.52));border-color:rgba(var(--ink),0.11)}
 html[data-theme="light"] .proj-card:hover{border-color:rgba(138,106,16,0.25);box-shadow:0 22px 50px rgba(25,30,45,0.10)}
-html[data-theme="light"] .cert-card{background:#ffffff;border-color:rgba(var(--ink),0.07)}
-html[data-theme="light"] .skill-card{background:#ffffff;border-color:rgba(138,106,16,0.18)}
+html[data-theme="light"] .cert-card{background:linear-gradient(150deg,rgba(255,255,255,0.72),rgba(255,255,255,0.52));border-color:rgba(var(--ink),0.11)}
+html[data-theme="light"] .skill-card{background:linear-gradient(180deg,rgba(255,255,255,0.72),rgba(255,255,255,0.52) 70%);border-color:rgba(138,106,16,0.2)}
 html[data-theme="light"] .cert-card:hover,.skill-card:hover{border-color:rgba(138,106,16,0.24);box-shadow:0 16px 40px rgba(25,30,45,0.08)}
-html[data-theme="light"] .about-right{background:#ffffff;border-color:rgba(138,106,16,0.22)}
+html[data-theme="light"] .about-right{background:linear-gradient(155deg,rgba(255,255,255,0.74),rgba(255,255,255,0.55));border-color:rgba(138,106,16,0.22)}
 html[data-theme="light"] .cert-featured{background:linear-gradient(155deg,rgba(138,106,16,0.06),rgba(255,255,255,0.6));border-color:rgba(138,106,16,0.2)}
 html[data-theme="light"] .cf-ico,.skill-icon,.cert-ico{background:rgba(138,106,16,0.08)}
 html[data-theme="light"] .c-input{background:#ffffff;border-color:rgba(var(--ink),0.09)}
@@ -810,7 +900,7 @@ html[data-theme="light"] .cf-meta{color:rgba(var(--ink),0.5)}
 html[data-theme="light"] .cf-buls li{color:rgba(var(--ink),0.6)}
 html[data-theme="light"] .proj-feat{color:#0a0a0a}
 @media print{
-  nav,.scroll-progress,.to-top,.hero-ambient,.hero-right,.menu-btn,.theme-toggle,.proj-filters,.proj-toolbar,.proj-empty,.proj-feat,.hero-cta-row,.hero-bottom-row,.c-form,.ft-soc{display:none!important}
+  nav,.scroll-progress,.to-top,.hero-ambient,.hero-shapes,.hero-right,.menu-btn,.theme-toggle,.proj-filters,.proj-toolbar,.proj-empty,.proj-feat,.hero-cta-row,.hero-bottom-row,.c-form,.ft-soc{display:none!important}
   body{background:#fff!important;color:#000!important}
   section{background:#fff!important;padding:24px 0!important;position:static!important}
   .rev,.rev-l,.rev-r,.proj-card,.cert-card,.skill-card,.tl-item{opacity:1!important;transform:none!important}
@@ -846,6 +936,19 @@ html[data-theme="light"] .proj-feat{color:#0a0a0a}
 
 <section id="home">
   <div class="hero-ambient"></div>
+  <div class="hero-shapes" aria-hidden="true">
+    <div class="hero-gridlines" data-depth="7" data-scroll="0.05"></div>
+    <span class="shape s1" data-depth="24" data-scroll="0.16"></span>
+    <span class="shape s2" data-depth="16" data-scroll="0.07"></span>
+    <span class="shape s3" data-depth="42" data-scroll="0.22"></span>
+    <span class="shape s4" data-depth="50" data-scroll="-0.07"></span>
+    <span class="shape s5" data-depth="34" data-scroll="0.15"></span>
+    <span class="shape s6" data-depth="56" data-scroll="-0.12"></span>
+    <span class="shape s7" data-depth="30" data-scroll="0.10"></span>
+    <span class="shape s8" data-depth="60" data-scroll="-0.16"></span>
+    <span class="shape s9" data-depth="44" data-scroll="0.09"></span>
+    <span class="shape s10" data-depth="20" data-scroll="0.05"></span>
+  </div>
   <div class="hero-spotlight" aria-hidden="true"></div>
 
   <div class="hero-grid">
@@ -1464,16 +1567,79 @@ html[data-theme="light"] .proj-feat{color:#0a0a0a}
   },{passive:true});
   home.addEventListener('pointerleave',()=>home.classList.remove('spot-on'));
 })();
+// hero parallax: mouse-reactive geometric layers + scroll-triggered depth
+(function(){
+  const home=document.getElementById('home');
+  if(!home)return;
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  const layers=Array.from(home.querySelectorAll('[data-depth]'));
+  const gL=home.querySelector('.hero-left');
+  const gR=home.querySelector('.hero-right');
+  const fine=matchMedia('(hover:hover) and (pointer:fine)').matches;
+  let tx=0,ty=0,mx=0,my=0,raf=0,inView=true;
+  function apply(){
+    const full=home.offsetHeight||window.innerHeight;
+    const sy=Math.max(0,Math.min(window.scrollY,full));
+    const k=Math.min(1,sy/(full*0.85));
+    for(let i=0;i<layers.length;i++){
+      const el=layers[i];
+      const d=parseFloat(el.dataset.depth)||0;
+      const s=parseFloat(el.dataset.scroll)||0;
+      el.style.setProperty('--px',(mx*d).toFixed(2)+'px');
+      el.style.setProperty('--py',(my*d+sy*s).toFixed(2)+'px');
+    }
+    if(gL){
+      gL.style.transform='translate3d(0,'+(sy*0.17).toFixed(1)+'px,0)';
+      gL.style.opacity=(1-k).toFixed(3);
+    }
+    if(gR){
+      gR.style.transform='translate3d(0,'+(sy*0.32).toFixed(1)+'px,0)';
+      gR.style.opacity=Math.max(0,1-k*1.05).toFixed(3);
+    }
+  }
+  function frame(){
+    raf=0;
+    const dx=tx-mx,dy=ty-my;
+    if(Math.abs(dx)>0.1||Math.abs(dy)>0.1){mx+=dx*0.11;my+=dy*0.11;raf=requestAnimationFrame(frame)}
+    else{mx=tx;my=ty}
+    apply();
+  }
+  function kick(){if(inView&&!raf)raf=requestAnimationFrame(frame)}
+  if(fine){
+    home.addEventListener('pointermove',e=>{
+      const r=home.getBoundingClientRect();
+      if(!r.width||!r.height)return;
+      tx=((e.clientX-r.left)/r.width-0.5)*2;
+      ty=((e.clientY-r.top)/r.height-0.5)*2;
+      kick();
+    },{passive:true});
+    home.addEventListener('pointerleave',()=>{tx=0;ty=0;kick()});
+  }
+  window.addEventListener('scroll',kick,{passive:true});
+  window.addEventListener('resize',kick,{passive:true});
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(es=>{inView=es[0].isIntersecting;if(inView)kick()},{threshold:0}).observe(home);
+  }
+  apply();
+})();
 // scroll chrome
 const nav=document.getElementById('nav'),sp=document.getElementById('scrollProgress'),tp=document.getElementById('toTop')
-window.addEventListener('scroll',()=>{
+const heroSec=document.getElementById('home')
+function onScroll(){
   const sy=window.scrollY;
   if(nav)nav.classList.toggle('scrolled',sy>50);
+  if(nav&&heroSec){
+    const trigger=Math.max((heroSec.offsetHeight||window.innerHeight)-90,120);
+    nav.classList.toggle('floating',sy>trigger);
+  }
   const h=document.documentElement;
   const pct=h.scrollHeight>h.clientHeight?(sy)/(h.scrollHeight-h.clientHeight)*100:0;
   if(sp)sp.style.width=pct+'%';
   if(tp)tp.classList.toggle('show',sy>600);
-},{passive:true})
+}
+window.addEventListener('scroll',onScroll,{passive:true})
+window.addEventListener('resize',onScroll,{passive:true})
+onScroll()
 if(tp)tp.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}))
 // active section spy
 const secs=document.querySelectorAll('section[id]'),navA=Array.from(document.querySelectorAll('.nav-links a[href^="#"]'))
